@@ -1,0 +1,5 @@
+/* .wave-switch — выбор формы волны */
+.wave-switch { display: flex; gap: 10px; padding-left: 2px; }
+.wave-switch__key { width: 62px; height: 62px; }
+.wave-switch__key svg { width: 40px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.wave-switch__key:not(.is-on) svg { stroke: #6a6966; }

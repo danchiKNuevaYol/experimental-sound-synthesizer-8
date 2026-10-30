@@ -1,0 +1,14 @@
+/* .fx-rack — цепочка эффектов выбранного канала. Модификатор --a / --b / --p — чья цепочка открыта */
+.fx-rack__tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: -2px 0 6px; }
+.fx-rack__tab { height: 26px; border: 1px solid #b3ada6; border-radius: 7px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-3); background: linear-gradient(160deg, #fdfbf8, #d6d4d0); box-shadow: 0 2px 3px rgba(40, 34, 28, 0.25), inset 0 1px 0 #fff; }
+.fx-rack__tab:active { transform: translateY(1px); }
+.fx-rack__tab.is-on { color: #fff; box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.25); }
+.fx-rack__tab--a.is-on { background: linear-gradient(160deg, var(--ch-a-hi), var(--ch-a-lo)); border-color: var(--ch-a-lo); }
+.fx-rack__tab--b.is-on { background: linear-gradient(160deg, var(--ch-b-hi), var(--ch-b-lo)); border-color: var(--ch-b-lo); }
+.fx-rack__tab--p.is-on { background: linear-gradient(160deg, var(--ch-p-hi), var(--ch-p-lo)); border-color: var(--ch-p-lo); }
+.fx-rack__chain { flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); align-content: space-evenly; row-gap: 8px; }
+.fx-rack__chain .knob { gap: 5px; }
+/* рамка цепочки подсвечивается цветом канала */
+.fx-rack--a { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7), inset 0 -3px 0 var(--ch-a); }
+.fx-rack--b { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7), inset 0 -3px 0 var(--ch-b); }
+.fx-rack--p { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7), inset 0 -3px 0 var(--ch-p); }

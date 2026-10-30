@@ -1,0 +1,19 @@
+/* Порядок важен: шрифты → тема (цвета, размеры) → база → блоки интерфейса.
+   Каждый блок — свой файл; имя файла = CSS-класс блока = модуль в src/ui/. */
+@import "./fonts.css";
+@import "./theme.css";
+@import "./base.css";
+@import "./blocks/device.css";
+@import "./blocks/panel.css";
+@import "./blocks/key.css";
+@import "./blocks/scene-bar.css";
+@import "./blocks/wave-switch.css";
+@import "./blocks/knob.css";
+@import "./blocks/display.css";
+@import "./blocks/fx-rack.css";
+@import "./blocks/step-grid.css";
+@import "./blocks/mixer.css";
+@import "./blocks/fader.css";
+@import "./blocks/meter.css";
+@import "./blocks/recorder.css";
+@import "./blocks/lcd.css";

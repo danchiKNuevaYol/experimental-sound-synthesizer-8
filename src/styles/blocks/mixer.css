@@ -1,0 +1,8 @@
+/* .mixer — каналы A, B, Ч и общий: панорама (у общего — яркость), индикатор, фейдер */
+.mixer__strips { flex: 1; display: flex; justify-content: space-around; }
+.mixer__strip { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 8px; }
+.mixer__body { position: relative; }
+/* индикатор стоит слева от фейдера и не сдвигает его: ручка панорамы остаётся точно над фейдером */
+.mixer__body .meter { position: absolute; top: 0; right: calc(50% + 14px); }
+.mixer__strip--master { position: relative; }
+.mixer__strip--master::before { content: ""; position: absolute; left: -12px; top: 4px; bottom: 4px; width: 1px; background: var(--panel-line); }

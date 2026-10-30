@@ -1,0 +1,6 @@
+/* .meter — индикатор уровня канала */
+.meter { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; padding: 3px; border-radius: 3px; background: #1d1f22; box-shadow: inset 0 1px 2px #000, 0 1px 0 #fff; }
+.meter__led { width: 5px; height: 9.5px; border-radius: 1px; background: #2f3a2f; }
+.meter__led.is-on { background: #7bd88f; box-shadow: 0 0 4px rgba(123, 216, 143, 0.7); }
+.meter__led--hot { background: #4a2f2a; }
+.meter__led--hot.is-on { background: #ff6b4a; box-shadow: 0 0 4px rgba(255, 107, 74, 0.8); }

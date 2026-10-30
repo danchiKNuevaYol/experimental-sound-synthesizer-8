@@ -1,0 +1,18 @@
+/* .step-grid — 16-шаговая сетка частиц. Модификатор ячейки = дорожка: --drop --click --crackle --boom */
+.step-grid { flex: 1; display: grid; grid-template-columns: 1fr 48px; column-gap: 16px; }
+.step-grid__rows { display: flex; flex-direction: column; justify-content: space-between; }
+.step-grid__row { display: grid; grid-template-columns: 98px repeat(16, 1fr); column-gap: 6px; align-items: center; }
+.step-grid__row--nums { font: 600 10px var(--font-ui); color: var(--ink-3); text-align: center; }
+.step-grid__num.is-now { color: var(--ch-a-lo); }
+.step-grid__name { display: flex; align-items: center; gap: 9px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: var(--ink-2); text-transform: uppercase; }
+.step-grid__cell { height: 38px; padding: 0; border: 1px solid #b8b6b0; border-radius: 6px; background: linear-gradient(#e0deda, #d1cfca); box-shadow: 0 1px 2px rgba(40, 34, 28, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7); }
+.step-grid__cell--beat { background: linear-gradient(#fdfcfa, #ecebe7); }
+.step-grid__cell:active { transform: translateY(1px); }
+.step-grid__cell.is-on { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(40, 34, 28, 0.3); }
+.step-grid__cell--drop.is-on { background: linear-gradient(#f4a96a, #ee8c4a); border-color: #d9773a; }
+.step-grid__cell--click.is-on { background: linear-gradient(#9cc4ec, #78aae0); border-color: #5f93cc; }
+.step-grid__cell--crackle.is-on { background: linear-gradient(#f8dc96, #f0c866); border-color: #d9ac45; }
+.step-grid__cell--boom.is-on { background: linear-gradient(#cfd3d0, #b3b8b4); border-color: #9a9f9b; }
+.step-grid__cell.is-now { outline: 2px solid var(--ink); outline-offset: 1px; }
+.step-grid__side { display: flex; flex-direction: column; justify-content: space-between; padding: 22px 0 2px; }
+.step-grid__side .key { height: 44px; }

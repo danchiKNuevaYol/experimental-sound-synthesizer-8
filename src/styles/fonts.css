@@ -1,0 +1,28 @@
+/* ==========================================================
+   ШРИФТЫ — меняйте здесь (и ссылку Google Fonts в index.html).
+   Выбирайте шрифты с кириллицей.
+
+   Свой файл шрифта (работает и без интернета — удобно для живого показа):
+   1. Положите .woff2 в папку src/styles/fonts/
+   2. Раскомментируйте @font-face ниже и впишите имя в переменную.
+      Bun сам скопирует файл шрифта в сборку.
+   ========================================================== */
+
+/*
+@font-face {
+  font-family: "MyFont";
+  src: url("./fonts/MyFont.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+*/
+
+:root {
+  --font-display: "Inter", "Helvetica Neue", Arial, sans-serif;            /* название прибора */
+  --font-ui:      "Inter", "Helvetica Neue", Arial, sans-serif;            /* подписи панелей и регуляторов */
+  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;        /* дисплей и счётчики */
+
+  --fs-title: 12px;    /* заголовки панелей */
+  --fs-label: 10px;    /* подписи регуляторов */
+  --ls-caps: 0.12em;   /* разрядка заглавных */
+}

@@ -1,0 +1,20 @@
+/* .device — корпус прибора */
+.device {
+  position: absolute; left: 0; top: 0; width: var(--device-w); height: var(--device-h); transform-origin: 0 0;
+  padding: 0 28px 0 33px; border-radius: 30px; border: 2px solid #fff;
+  background: linear-gradient(160deg, var(--housing-1), var(--housing-2) 56%, var(--housing-3));
+  box-shadow: 0 28px 40px rgba(51, 43, 36, 0.38);
+}
+.device::after { content: ""; position: absolute; inset: 3px; border: 1px solid #a5a39f; border-radius: 27px; pointer-events: none; }
+
+.device__head { height: 47px; padding-top: 6px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
+.device__title { margin: 0; font: 700 14px/1 var(--font-display); letter-spacing: 0.26em; display: flex; align-items: center; gap: 10px; }
+.device__title::after { content: ""; width: 38px; height: 1px; background: var(--ink-4); }
+.device__sub { margin: 0; font-size: 9.5px; letter-spacing: 0.16em; color: var(--ink-3); }
+
+.device__row { display: grid; }
+.device__row--top { grid-template-columns: 344px 444px 344px 258px; column-gap: 13px; height: 242px; }
+.device__row--bottom { grid-template-columns: 874px 334px 198px; column-gap: 11.5px; height: 267px; margin-top: 15px; }
+
+.device__foot { position: absolute; left: 33px; right: 28px; bottom: 11px; display: flex; justify-content: space-between; font-size: 9px; letter-spacing: 0.14em; color: var(--ink-4); }
+.device__keys { color: var(--ink-3); }

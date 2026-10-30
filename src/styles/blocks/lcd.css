@@ -1,0 +1,6 @@
+/* .lcd — маленький цифровой экран записи */
+.lcd { height: 48px; padding: 6px 12px; border-radius: 6px; background: var(--lcd); color: #f2f2f2; border: 1px solid #000; box-shadow: 0 1px 0 #fff; display: grid; grid-template-columns: 14px 1fr; align-items: center; }
+.lcd__dot { width: 10px; height: 10px; border-radius: 50%; background: #5a2a26; }
+.lcd__dot.is-on { background: #ff5b4a; box-shadow: 0 0 8px #ff5b4a; }
+.lcd__time { font: 500 17px var(--font-mono); text-align: right; letter-spacing: 0.04em; }
+.lcd__status { grid-column: 1 / -1; text-align: right; font: 500 8.5px var(--font-mono); letter-spacing: 0.12em; color: #8d8f92; }

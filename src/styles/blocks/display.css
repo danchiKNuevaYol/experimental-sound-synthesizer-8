@@ -1,0 +1,7 @@
+/* .display — цифровой дисплей (холст p5.js + кнопки темпа) */
+.display { position: relative; }
+.display__screen canvas { display: block; border-radius: 8px; }
+.display__tempo { position: absolute; right: 12px; bottom: 9px; display: flex; align-items: center; gap: 7px; font: 500 10px var(--font-mono); color: #8d8f92; }
+.display__bpm { min-width: 28px; text-align: center; color: #eee; font-weight: 500; font-size: 12px; }
+.display__btn { width: 20px; height: 20px; padding: 0; border: 1px solid #3b3f43; border-radius: 5px; background: #1c1f22; color: #ddd; line-height: 1; }
+.display__btn:hover { background: #2a2e32; }

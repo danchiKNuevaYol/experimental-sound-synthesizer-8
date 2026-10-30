@@ -1,0 +1,6 @@
+/* .scene-bar — сцены в шапке */
+.scene-bar { justify-self: center; display: flex; align-items: center; gap: 6px; }
+.scene-bar__label { font-size: 9px; letter-spacing: 0.16em; color: var(--ink-4); margin-right: 4px; }
+.scene-bar__chip { padding: 5px 11px; border: 1px solid #b3ada6; border-radius: 8px; font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; background: linear-gradient(160deg, #fdfbf8, #d6d4d0); box-shadow: 0 2px 3px rgba(40, 34, 28, 0.28), inset 0 1px 0 #fff; }
+.scene-bar__chip:active { transform: translateY(1px); }
+.scene-bar__chip.is-on { color: #fff; border-color: var(--ch-a-lo); background: linear-gradient(160deg, var(--ch-a-hi), var(--ch-a) 40%, var(--ch-a-lo)); text-shadow: 0 1px 1px rgba(120, 50, 10, 0.4); }

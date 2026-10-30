@@ -1,0 +1,7 @@
+/* .panel — секция прибора с заголовком */
+.panel { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 13px 16px 14px; background: var(--panel); border: 1px solid var(--panel-line); border-radius: 12px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7); }
+.panel__title { margin: 0 0 12px; display: flex; align-items: center; gap: 10px; font: 700 var(--fs-title)/1 var(--font-ui); letter-spacing: 0.1em; color: var(--ink-2); white-space: nowrap; }
+.panel__knobs { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+.panel--display { padding: 8px; background: var(--lcd-frame); border: 2px solid #888; border-radius: 13px; box-shadow: inset 0 0 0 2px #000, 0 1px 0 #fff; }
+.panel--record { gap: 10px; }
+.panel--record .panel__title { margin-bottom: 2px; }

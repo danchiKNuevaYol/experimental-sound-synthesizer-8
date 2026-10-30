@@ -1,0 +1,15 @@
+{
+  "name": "experimental-sound-synthesizer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Веб-синтезатор искусственных природных звуков из простых электронных сигналов",
+  "scripts": {
+    "dev": "bun --hot ./index.html",
+    "build": "bun build ./index.html --outdir=dist --minify"
+  },
+  "dependencies": {
+    "p5": "^1.11.3",
+    "tone": "^15.1.22"
+  }
+}
