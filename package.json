@@ -6,7 +6,7 @@
   "description": "Веб-синтезатор искусственных природных звуков из простых электронных сигналов",
   "scripts": {
     "dev": "bun --hot ./index.html",
-    "build": "bun build ./index.html --outdir=dist --minify"
+    "build": "bun build ./index.html --outdir=dist --minify --public-path=./"
   },
   "dependencies": {
     "p5": "^1.11.3",
