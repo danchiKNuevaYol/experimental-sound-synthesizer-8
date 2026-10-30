@@ -2,7 +2,7 @@
 // Каждый блок интерфейса — модуль в src/ui/ с тем же именем, что и CSS-класс блока.
 
 import { createStore } from './state/store.js';
-import { initialState, SCENES } from './state/scenes.js';
+import { PRESETS, placeToState, normalizeQuery } from './state/place.js';
 import { engine } from './audio/engine.js';
 import { mountKnob } from './ui/knob.js';
 import { mountFader } from './ui/fader.js';
@@ -10,14 +10,16 @@ import { mountMeter } from './ui/meter.js';
 import { mountWaveSwitch } from './ui/wave-switch.js';
 import { mountStepGrid } from './ui/step-grid.js';
 import { mountFxRack } from './ui/fx-rack.js';
-import { mountSceneBar, applyScene } from './ui/scene-bar.js';
+import { mountPlaceBar, tuneTo } from './ui/place-bar.js';
 import { mountRecorder } from './ui/recorder.js';
 import { mountDisplay } from './ui/display.js';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
 
-const store = createStore(initialState());
+// Место берётся из адреса (?place=Озеро Тишины, 4:12) — так прибором делятся ссылкой
+const startQuery = normalizeQuery(new URLSearchParams(location.search).get('place') || '') || PRESETS[0].query;
+const store = createStore(placeToState(startQuery));
 const live = { state: store.get(), step: -1, playing: false, recording: false };   // для дисплея (p5)
 
 // --- блоки, которые перерисовываются от состояния
@@ -27,7 +29,7 @@ const views = [
   ...$$('.fader').map((el) => mountFader(el, store)),
   ...$$('.wave-switch').map((el) => mountWaveSwitch(el, store)),
   mountFxRack($('.fx-rack'), store),
-  mountSceneBar($('.scene-bar'), store),
+  mountPlaceBar($('.place-bar'), store),
   mountDisplay($('.display'), store, live),
   grid.update,
 ];
@@ -79,11 +81,17 @@ async function toggleRec() {
     setUi({ rec: 'recording', hasTake: false });
   }
 }
+// «Озеро Тишины 04-12 — ESS.wav»: без символов, которые нельзя в имени файла
+function takeFileName(place) {
+  const clean = (t) => String(t).replace(/[\\/:*?"<>|\u0000-\u001f]/g, ' ').replace(/\s+/g, ' ').trim();
+  const base = place ? `${clean(place.name)} ${clean(String(place.time).replace(':', '-'))}`.trim() : '';
+  return `${base || 'Место'} — ESS.wav`;
+}
 function save() {
   if (!engine.take) return;
   const a = document.createElement('a');
   a.href = URL.createObjectURL(engine.take);
-  a.download = `ess-${new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-')}.wav`;
+  a.download = takeFileName(store.get().place);
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 }
@@ -98,16 +106,29 @@ function save() {
 
 // --- горячие клавиши для живого исполнения
 const FX_KEYS = { KeyQ: 'a', KeyW: 'b', KeyE: 'p' };
+const typing = (t) => t instanceof Element && t.matches('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
 window.addEventListener('keydown', (e) => {
+  // в поле ввода клавиши — это текст («Ветер 1»), а не команды прибора; Escape возвращает управление
+  if (typing(e.target)) {
+    if (e.key === 'Escape') e.target.blur();
+    return;
+  }
   if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
   if (e.code === 'Space') { e.preventDefault(); ui.playing ? stop() : play(); return; }
   if (e.code === 'KeyR') { toggleRec(); return; }
   if (FX_KEYS[e.code]) { store.update((s) => ({ ...s, fxTarget: FX_KEYS[e.code] })); return; }
+  if (e.key === '/' || e.code === 'Slash') {
+    e.preventDefault();
+    const input = $('.place-bar__input');
+    input.focus();
+    input.select();
+    return;
+  }
   const n = Number(e.key);
-  if (n >= 1 && n <= SCENES.length) applyScene(store, SCENES[n - 1].id);
+  if (n >= 1 && n <= PRESETS.length) tuneTo(store, PRESETS[n - 1].query);
 });
 // пробел не должен «нажимать» кнопку, на которой остался фокус
-window.addEventListener('keyup', (e) => { if (e.code === 'Space') e.preventDefault(); });
+window.addEventListener('keyup', (e) => { if (e.code === 'Space' && !typing(e.target)) e.preventDefault(); });
 
 // --- прибор нарисован в размере 1490 × 608 и масштабируется под окно целиком
 const DEVICE = { w: 1490, h: 608 };

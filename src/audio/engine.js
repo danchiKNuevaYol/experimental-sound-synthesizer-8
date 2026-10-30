@@ -63,6 +63,7 @@ class Engine {
   state = null;
   stepIndex = 0;
   stepListeners = new Set();
+  triggerListeners = new Set();
   recStartedAt = 0;
   initPromise = null;
   bBase = 440;
@@ -181,15 +182,27 @@ class Engine {
     const s = this.state && this.state.steps;
     if (s) {
       const v = () => 0.5 + Math.random() * 0.5;
-      if (s[0][i]) this.P.drop.triggerAttackRelease(pick(DROP_NOTES), '16n', time, v());
-      if (s[1][i]) this.P.click.triggerAttackRelease('64n', time, v());
+      if (s[0][i]) { this.P.drop.triggerAttackRelease(pick(DROP_NOTES), '16n', time, v()); this.#emit('drop', time); }
+      if (s[1][i]) { this.P.click.triggerAttackRelease('64n', time, v()); this.#emit('click', time); }
       if (s[2][i]) {
         this.P.crackle.triggerAttackRelease('64n', time, v());
         this.P.crackle.triggerAttackRelease('64n', time + 0.03 + Math.random() * 0.05, v() * 0.7);
+        this.#emit('crackle', time);
       }
-      if (s[3][i]) this.P.boom.triggerAttackRelease('A1', '8n', time, v());
+      if (s[3][i]) { this.P.boom.triggerAttackRelease('A1', '8n', time, v()); this.#emit('boom', time); }
     }
     Tone.getDraw().schedule(() => this.stepListeners.forEach((fn) => fn(i)), time);
+  }
+
+  // Событие частицы для дисплея: вызывается в момент, когда звук реально слышен
+  #emit(trackId, time) {
+    Tone.getDraw().schedule(() => this.triggerListeners.forEach((fn) => fn(trackId)), time);
+  }
+
+  /** Подписка на срабатывание частиц: fn('drop' | 'click' | 'crackle' | 'boom'). Возвращает отписку. */
+  onTrigger(fn) {
+    this.triggerListeners.add(fn);
+    return () => this.triggerListeners.delete(fn);
   }
 
   /** Применяет состояние интерфейса к звуку. Можно вызывать до init() — значения запомнятся. */
